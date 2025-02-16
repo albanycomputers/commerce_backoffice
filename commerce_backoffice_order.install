@@ -1,0 +1,30 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the commerce_backoffice module.
+ *
+ */
+
+/**
+ * Implements hook_views_default_views_alter().
+ */
+function commerce_backoffice_order_views_default_views_alter(&$views) {
+  // Disable the default order listings.
+  if (isset($views['commerce_orders'])) {
+    $views['commerce_orders']->disabled = TRUE;
+  }
+  if (isset($views['commerce_user_orders'])) {
+    $views['commerce_user_orders']->disabled = TRUE;
+  }
+}
+
+
+function commerce_backoffice_order_uninstall() {
+  // Enable the default order listings.
+  if (isset($views['commerce_orders'])) {
+    $views['commerce_orders']->disabled = FALSE;
+  }
+  if (isset($views['commerce_user_orders'])) {
+    $views['commerce_user_orders']->disabled = FALSE;
+  }
+}

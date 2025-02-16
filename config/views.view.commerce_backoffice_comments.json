@@ -1,0 +1,489 @@
+{
+    "_config_name": "views.view.commerce_backoffice_comments",
+    "name": "commerce_backoffice_comments",
+    "description": "",
+    "tag": "default",
+    "disabled": false,
+    "base_table": "comment",
+    "human_name": "Commerce Backoffice: Comments",
+    "core": 7,
+    "display": {
+        "default": {
+            "display_title": "Master",
+            "display_plugin": "default",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": {
+                        "query_comment": false
+                    }
+                },
+                "title": "Comments",
+                "css_class": "commerce-backoffice-view",
+                "use_ajax": true,
+                "use_more_always": false,
+                "access": {
+                    "type": "perm",
+                    "perm": "administer comments"
+                },
+                "cache": {
+                    "type": "none"
+                },
+                "exposed_form": {
+                    "type": "basic",
+                    "options": {
+                        "autosubmit": true
+                    }
+                },
+                "pager": {
+                    "type": "full",
+                    "options": {
+                        "items_per_page": "50"
+                    }
+                },
+                "style_plugin": "table",
+                "style_options": {
+                    "columns": {
+                        "views_bulk_operations": "views_bulk_operations",
+                        "subject": "subject",
+                        "name": "name",
+                        "title": "title",
+                        "changed": "changed",
+                        "edit_comment": "edit_comment"
+                    },
+                    "default": "-1",
+                    "info": {
+                        "views_bulk_operations": {
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "subject": {
+                            "sortable": 1,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "name": {
+                            "sortable": 0,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "title": {
+                            "sortable": 0,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "changed": {
+                            "sortable": 1,
+                            "default_sort_order": "asc",
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        },
+                        "edit_comment": {
+                            "align": "",
+                            "separator": "",
+                            "empty_column": 0
+                        }
+                    },
+                    "empty_table": true
+                },
+                "empty": {
+                    "area": {
+                        "id": "area",
+                        "table": "views",
+                        "field": "area",
+                        "empty": true,
+                        "content": "No comments match your search criteria.",
+                        "format": "filtered_html"
+                    }
+                },
+                "relationships": {
+                    "nid": {
+                        "id": "nid",
+                        "table": "comment",
+                        "field": "nid",
+                        "required": true
+                    },
+                    "uid": {
+                        "id": "uid",
+                        "table": "comment",
+                        "field": "uid"
+                    }
+                },
+                "fields": {
+                    "views_bulk_operations": {
+                        "id": "views_bulk_operations",
+                        "table": "comment",
+                        "field": "views_bulk_operations",
+                        "label": "",
+                        "element_label_colon": false,
+                        "vbo_settings": {
+                            "display_type": "0",
+                            "enable_select_all_pages": 1,
+                            "force_single": 0,
+                            "display_result": 1,
+                            "entity_load_capacity": "10"
+                        },
+                        "vbo_operations": {
+                            "action::views_bulk_operations_delete_item": {
+                                "selected": 1,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 1,
+                                "label": "Delete comment"
+                            },
+                            "action::system_message_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::views_bulk_operations_script_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::views_bulk_operations_modify_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": "",
+                                "settings": {
+                                    "show_all_tokens": 1,
+                                    "display_values": {
+                                        "_all_": "_all_"
+                                    }
+                                }
+                            },
+                            "action::views_bulk_operations_argument_selector_action": {
+                                "selected": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": "",
+                                "settings": {
+                                    "url": ""
+                                }
+                            },
+                            "action::comment_publish_action": {
+                                "selected": 1,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::system_goto_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::comment_save_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::system_send_email_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::comment_unpublish_action": {
+                                "selected": 1,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            },
+                            "action::comment_unpublish_by_keyword_action": {
+                                "selected": 0,
+                                "use_queue": 0,
+                                "skip_confirmation": 0,
+                                "override_label": 0,
+                                "label": ""
+                            }
+                        }
+                    },
+                    "subject": {
+                        "id": "subject",
+                        "table": "comment",
+                        "field": "subject",
+                        "label": "Subject",
+                        "alter": {
+                            "word_boundary": false,
+                            "ellipsis": false
+                        },
+                        "element_label_colon": false
+                    },
+                    "name": {
+                        "id": "name",
+                        "table": "comment",
+                        "field": "name"
+                    },
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "nid",
+                        "label": "Posted in"
+                    },
+                    "changed": {
+                        "id": "changed",
+                        "table": "comment",
+                        "field": "changed",
+                        "date_format": "short"
+                    },
+                    "edit_comment": {
+                        "id": "edit_comment",
+                        "table": "comment",
+                        "field": "edit_comment",
+                        "label": "Operations",
+                        "element_label_colon": false
+                    }
+                },
+                "sorts": {
+                    "created": {
+                        "id": "created",
+                        "table": "comment",
+                        "field": "created",
+                        "order": "DESC"
+                    }
+                },
+                "filters": {
+                    "status": {
+                        "id": "status",
+                        "table": "comment",
+                        "field": "status",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "",
+                            "label": "Published",
+                            "operator": "status_op",
+                            "identifier": "status",
+                            "required": true,
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "nid",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "title_op",
+                            "label": "Posted in",
+                            "operator": "title_op",
+                            "identifier": "title",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "combine": {
+                        "id": "combine",
+                        "table": "views",
+                        "field": "combine",
+                        "operator": "contains",
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "combine_op",
+                            "operator": "combine_op",
+                            "identifier": "combine",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        },
+                        "fields": {
+                            "subject": "subject",
+                            "name": "name"
+                        }
+                    }
+                }
+            }
+        },
+        "system_1": {
+            "display_title": "Comments",
+            "display_plugin": "system",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "defaults": {
+                    "hide_admin_links": false,
+                    "access": false,
+                    "filter_groups": false,
+                    "filters": false
+                },
+                "filters": {
+                    "status": {
+                        "id": "status",
+                        "table": "comment",
+                        "field": "status",
+                        "value": "1",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "",
+                            "label": "Published",
+                            "operator": "status_op",
+                            "identifier": "status",
+                            "required": true,
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "nid",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "title_op",
+                            "label": "Posted in",
+                            "operator": "title_op",
+                            "identifier": "title",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "combine": {
+                        "id": "combine",
+                        "table": "views",
+                        "field": "combine",
+                        "operator": "contains",
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "combine_op",
+                            "operator": "combine_op",
+                            "identifier": "combine",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        },
+                        "fields": {
+                            "subject": "subject",
+                            "name": "name"
+                        }
+                    }
+                },
+                "path": "admin/content/comment"
+            }
+        },
+        "system_2": {
+            "display_title": "Unpublished",
+            "display_plugin": "system",
+            "display_options": {
+                "query": {
+                    "type": "views_query",
+                    "options": []
+                },
+                "defaults": {
+                    "hide_admin_links": false,
+                    "access": false,
+                    "filter_groups": false,
+                    "filters": false
+                },
+                "filters": {
+                    "status": {
+                        "id": "status",
+                        "table": "comment",
+                        "field": "status",
+                        "value": "0",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "",
+                            "label": "Published",
+                            "operator": "status_op",
+                            "identifier": "status",
+                            "required": true,
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "title": {
+                        "id": "title",
+                        "table": "node",
+                        "field": "title",
+                        "relationship": "nid",
+                        "group": 1,
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "title_op",
+                            "label": "Posted in",
+                            "operator": "title_op",
+                            "identifier": "title",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        }
+                    },
+                    "combine": {
+                        "id": "combine",
+                        "table": "views",
+                        "field": "combine",
+                        "operator": "contains",
+                        "exposed": true,
+                        "expose": {
+                            "operator_id": "combine_op",
+                            "operator": "combine_op",
+                            "identifier": "combine",
+                            "remember_roles": {
+                                "2": "2",
+                                "1": 0,
+                                "3": 0
+                            }
+                        },
+                        "fields": {
+                            "subject": "subject",
+                            "name": "name"
+                        }
+                    }
+                },
+                "path": "admin/content/comment/approval"
+            }
+        }
+    }
+}
