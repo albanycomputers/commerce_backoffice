@@ -13,7 +13,6 @@
  */
 class commerce_backoffice_handler_filter_term_node_tid extends views_handler_filter {
   // Stores the exposed input for this filter.
-
   var $validated_exposed_input = NULL;
 
   function option_definition() {
@@ -25,7 +24,7 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     return $options;
   }
 
-  function options_form($form, $form_state) {
+  function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
     $form['per_vocabulary'] = array(
@@ -44,7 +43,7 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     );
   }
 
-  function value_form($form, $form_state) {
+  function value_form(&$form, &$form_state) {
     $vocabularies = commerce_backoffice_get_vocabularies($this->definition['product display']);
     if (empty($vocabularies)) {
       $form['markup'] = array(
@@ -117,9 +116,7 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
           $default_value = array_shift($keys);
         }
         // Due to #1464174 there is a chance that array('') was saved in the admin ui.
-
         // Let's choose a safe default value.
-
         elseif ($default_value == array('')) {
           $default_value = 'All';
         }
@@ -149,15 +146,12 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     }
 
     // If view is an attachment and is inheriting exposed filters, then assume
-
     // exposed input has already been validated
-
     if (!empty($this->view->is_attachment) && $this->view->display_handler->uses_exposed()) {
       $this->validated_exposed_input = (array) $this->view->exposed_raw_input[$this->options['expose']['identifier']];
     }
 
     // If it's non-required and there's no value don't bother filtering.
-
     if (!$this->options['expose']['required'] && empty($this->validated_exposed_input)) {
       return FALSE;
     }
@@ -165,7 +159,6 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     $rc = parent::accept_exposed_input($input);
     if ($rc) {
       // If we have previously validated input, override.
-
       if (isset($this->validated_exposed_input)) {
         $this->value = $this->validated_exposed_input;
       }
@@ -174,7 +167,7 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     return $rc;
   }
 
-  function exposed_validate($form, $form_state) {
+  function exposed_validate(&$form, &$form_state) {
     if (empty($this->options['exposed'])) {
       return;
     }
@@ -186,9 +179,8 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     return;
   }
 
-  function value_submit($form, $form_state) {
+  function value_submit($form, &$form_state) {
     // prevent array_filter from messing up our arrays in parent submit.
-
   }
 
   function admin_summary() {
@@ -197,13 +189,11 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
 
   function query() {
     // If no filter values are present, then do nothing.
-
     if (count($this->value) == 0) {
       return;
     }
     elseif (count($this->value) == 1) {
       // Somethis $this->value is an array with a single element so convert it.
-
       if (is_array($this->value)) {
         $this->value = current($this->value);
       }
@@ -214,23 +204,17 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
     }
 
     // The normal use of ensure_my_table() here breaks Views.
-
     // So instead we trick the filter into using the alias of the base table.
-
     // See http://drupal.org/node/271833
-
     // If a relationship is set, we must use the alias it provides.
-
     if (!empty($this->relationship)) {
       $this->table_alias = $this->relationship;
     }
     // If no relationship, then use the alias of the base table.
-
     elseif (isset($this->query->table_queue[$this->query->base_table]['alias'])) {
       $this->table_alias = $this->query->table_queue[$this->query->base_table]['alias'];
     }
     // This should never happen, but if it does, we fail quietly.
-
     else {
       return;
     }
@@ -256,7 +240,6 @@ class commerce_backoffice_handler_filter_term_node_tid extends views_handler_fil
       }
       foreach ($values as $vid => $tids) {
         // Now build the subqueries.
-
         $subquery = db_select('taxonomy_index', 'tn');
         $subquery->addField('tn', 'nid');
         $last = 'tn';

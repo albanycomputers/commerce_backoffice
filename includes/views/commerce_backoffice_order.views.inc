@@ -3,7 +3,7 @@
 /**
  * Implements hook_views_data_alter().
  */
-function commerce_backoffice_order_views_data_alter($data) {
+function commerce_backoffice_order_views_data_alter(&$data) {
   $data['views_entity_commerce_order']['operations_dropbutton'] = array(
     'field' => array(
       'title' => t('Operations links (Dropbutton)'),

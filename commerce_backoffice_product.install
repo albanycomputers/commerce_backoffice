@@ -11,7 +11,6 @@
  */
 function commerce_backoffice_product_enable() {
   // This module needs to run after commerce_product_ui.
-
   db_update('system')
     ->fields(array(
     'weight' => 10,

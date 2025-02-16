@@ -3,7 +3,7 @@
 /**
  * Implements hook_views_data_alter().
  */
-function commerce_backoffice_product_views_data_alter($data) {
+function commerce_backoffice_product_views_data_alter(&$data) {
   $vocabularies_to_fetch = array();
   foreach (field_info_instances('commerce_product') as $bundle => $instances) {
     foreach ($instances as $field_name => $instance) {

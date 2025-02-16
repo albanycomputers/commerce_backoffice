@@ -50,11 +50,8 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     );
 
     // Override the access plugin to always enforce views_plugin_access_menu.
-
     // The UI widget for configuring access is additionally hidden.
-
     // @see options_summary()
-
     $options['defaults']['default']['access'] = FALSE;
     $options['access'] = array(
       'default' => array(
@@ -73,22 +70,18 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
    *   order to adjust any possibly existing child router items of the replaced
    *   system path. (This method only returns new router items normally.)
    */
-  function execute_hook_menu($callbacks) {
+  function execute_hook_menu(&$callbacks) {
     $items = array();
 
     // Replace % with the link to our standard views argument loader
-
     // views_arg_load().
-
     $bits = explode('/', $this->get_option('path'));
     $page_arguments = array($this->view->name, $this->display->id);
     $this->view->init_handlers();
     $view_arguments = $this->view->argument;
 
     // Replace % with %views_arg for menu autoloading and add to the
-
     // page arguments so the argument actually comes through.
-
     foreach ($bits as $pos => $bit) {
       if ($bit == '%') {
         $argument = array_shift($view_arguments);
@@ -105,12 +98,9 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     }
 
     // Only existing system paths can be replaced.
-
     if (!isset($callbacks[$path])) {
       // However, if the specified path contains dynamic argument placeholders,
-
       // then we need to search more carefully.
-
       $views_path = $this->get_option('path');
       if (strpos($views_path, '%') !== FALSE) {
         $views_path = preg_quote($views_path, '@');
@@ -118,20 +108,19 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
         $result = preg_grep('@^' . $views_path . '$@', array_keys($callbacks));
         if ($result) {
           $parent_path = reset($result);
-          $parent = $callbacks[$parent_path];
+          $parent = &$callbacks[$parent_path];
         }
         else {
           return $items;
         }
       }
       // No dynamic placeholders found, so nothing can be replaced.
-
       else {
         return $items;
       }
     }
     else {
-      $parent = $callbacks[$path];
+      $parent = &$callbacks[$path];
     }
 
     $items[$path] = array(
@@ -148,13 +137,9 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     );
 
     // List of router item default property values, which are inherited to
-
     // children. These default values are only applied if the original parent
-
     // item does not define them (see below).
-
     // @see _menu_router_build()
-
     $defaults = array(
       'access callback' => 'user_access',
       'menu_name' => NULL,
@@ -166,66 +151,43 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     );
 
     // Grep all router items below the target path.
-
     $num_parent_parts = count(explode('/', $path));
     $children = preg_grep('@^' . preg_quote($path, '@') . '/@', array_keys($callbacks));
 
     // Ensure correct inheritance of properties on the original parent path
-
     // (being replaced) to child items.
-
     foreach ($children as $child_path) {
       // Only apply property inheritance to direct children of the parent path.
-
       $num_child_parts = count(explode('/', $child_path));
       if ($num_parent_parts == $num_child_parts - 1) {
         // Check if the child router item is a views page. If so, there are
-
         // default properties we do not want this item to inherit.
-
         if (isset($callbacks[$child_path]['page callback']) && ($callbacks[$child_path]['page callback'] === 'views_page')) {
           continue;
         }
-        $child = $callbacks[$child_path];
+        $child = &$callbacks[$child_path];
         // Copy all properties from the original parent that will be replaced
-
         // with new values.
-
         // This typically resets 'access arguments', etc.
-
         $child += array_intersect_key($parent, $items[$path]);
         // Copy all properties from the original parent, for which the router
-
         // system would inherit parent values or fill in default values.
-
         // This typically adds back 'file' and other properties defined on the
-
         // parent but not on $items[$path]. (The two operations could be
-
         // combined with $items[$path] + $defaults, but are separated for
-
         // documentation purposes and clarity.)
-
         $child += array_intersect_key($parent, $defaults);
         // Last catch-22, insert new default properties and their default values
-
         // for the child, which may not be defined on the original parent.
-
         // This typically inserts 'access callback', which can be omitted in
-
         // router item definitions and only gets a default of user_access() in
-
         // the final _menu_router_build(). Without this, the new access callback
-
         // views_access() in $items[$path] would be inherited to all children.
-
         $child += $defaults;
       }
     }
     // If the original parent path already existed, copy over its remaining
-
     // properties.
-
     $items[$path] += $parent;
 
     return $items;
@@ -239,13 +201,10 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
    */
   function execute() {
     // Let the world know that this is the page view we're using.
-
     views_set_page_view($this->view);
 
     // Prior to this being called, the $view should already be set to this
-
     // display, and arguments should be set on the view.
-
     $this->view->build();
     if (!empty($this->view->build_info['fail'])) {
       return backdrop_not_found();
@@ -263,7 +222,7 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
    *
    * This output is returned as an array.
    */
-  function options_summary($categories, $options) {
+  function options_summary(&$categories, &$options) {
     parent::options_summary($categories, $options);
 
     $categories['system'] = array(
@@ -271,9 +230,7 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     );
 
     // Disable the access plugin configuration in the UI.
-
     // @see option_definition()
-
     $categories['access']['build']['#access'] = FALSE;
 
     $path = strip_tags('/' . $this->get_option('path'));
@@ -291,7 +248,7 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
   /**
    * Provide the default form for setting options.
    */
-  function options_form($form, $form_state) {
+  function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
     switch ($form_state['section']) {
@@ -309,7 +266,7 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
     }
   }
 
-  function options_validate($form, $form_state) {
+  function options_validate(&$form, &$form_state) {
     parent::options_validate($form, $form_state);
 
     switch ($form_state['section']) {
@@ -322,13 +279,12 @@ class commerce_backoffice_content_plugin_display_system extends views_plugin_dis
           form_error($form['path'], t('"%" may not be used for the first segment of a path.'));
         }
         // Automatically remove '/' from path.
-
         $form_state['values']['path'] = trim($form_state['values']['path'], '/');
         break;
     }
   }
 
-  function options_submit($form, $form_state) {
+  function options_submit(&$form, &$form_state) {
     parent::options_submit($form, $form_state);
 
     switch ($form_state['section']) {

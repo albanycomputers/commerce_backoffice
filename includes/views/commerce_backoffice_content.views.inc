@@ -8,9 +8,8 @@
 /**
  * Implements hook_views_data_alter().
  */
-function commerce_backoffice_content_views_data_alter($data) {
+function commerce_backoffice_content_views_data_alter(&$data) {
   // Add the node filter that filters by node types with product reference fields.
-
   $data['node']['non_product_display_node_type'] = array(
     'title' => t('Non product display content types'),
     'help' => t('Filters by the content type but only shows non product displays content types as options.'),

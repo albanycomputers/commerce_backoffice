@@ -21,7 +21,6 @@ class CommerceBackofficeProductWebTestCase extends BackdropWebTestCase {
     $this->assertEqual($variation_type['type'], $type, 'Type saved.');
 
     // Use the inline_entity_form widget
-
     $instance = field_info_instance('node', 'field_product', $variation_type['type']);
     $instance['widget'] = array(
       'active' => 1,
@@ -96,7 +95,6 @@ class CommerceBackofficeProductTestCase extends CommerceBackofficeProductWebTest
    */
   function testProductDisplay() {
     // Create a product display.
-
     backdrop_static_reset('checkPermissions');
     $admin_user = $this->backdropCreateUser(array(
       'create ' . $this->variationType['type'] . ' content',
@@ -106,7 +104,6 @@ class CommerceBackofficeProductTestCase extends CommerceBackofficeProductWebTest
     $productDisplay = $this->createProductDisplay($this->variationType['type']);
 
     // visit the product display.
-
     $this->backdropGet('node/' . $productDisplay->nid);
     $this->assertResponse(200);
   }

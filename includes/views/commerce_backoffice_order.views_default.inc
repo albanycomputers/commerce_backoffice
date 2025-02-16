@@ -766,9 +766,8 @@ function commerce_backoffice_order_views_default_views() {
 /**
  * Implements hook_views_default_views_alter().
  */
-function commerce_backoffice_order_views_default_views_alter($views) {
+function commerce_backoffice_order_views_default_views_alter(&$views) {
   // Disable the default order listings.
-
   if (isset($views['commerce_orders'])) {
     $views['commerce_orders']->disabled = TRUE;
   }

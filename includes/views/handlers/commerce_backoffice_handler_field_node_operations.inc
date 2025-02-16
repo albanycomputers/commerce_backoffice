@@ -15,7 +15,7 @@ class commerce_backoffice_handler_field_node_operations extends views_handler_fi
     return $options;
   }
 
-  function options_form($form, $form_state) {
+  function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
 
     $form['add_quick_edit'] = array(
@@ -35,7 +35,6 @@ class commerce_backoffice_handler_field_node_operations extends views_handler_fi
     $links = menu_contextual_links('node', 'node', array($nid));
 
     // Add the quick-edit link which opens the megarow.
-
     if ($this->options['add_quick_edit']) {
       $quick_edit['quick-edit'] = menu_get_item('commerce_backoffice/variations/' . $nid);
       if ($quick_edit['quick-edit']['access']) {
@@ -46,9 +45,8 @@ class commerce_backoffice_handler_field_node_operations extends views_handler_fi
     }
 
     // Add the destination to the links if specified.
-
     if ($this->options['add_destination']) {
-      foreach ($links as $id => $link) {
+      foreach ($links as $id => &$link) {
         $link['query'] = backdrop_get_destination();
       }
     }

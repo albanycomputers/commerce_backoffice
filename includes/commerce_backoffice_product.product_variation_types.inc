@@ -22,17 +22,14 @@ function commerce_backoffice_product_variation_types_overview() {
   $rows = array();
 
   // Loop through all defined product variation types.
-
   foreach (commerce_product_types() as $type => $product_type) {
     // Build the operation links for the current product variation type.
-
     $links = menu_contextual_links('commerce-product-type', 'admin/commerce/config/product-variation-types', array(strtr($type, array('_' => '-'))));
 
     $description = check_plain($product_type['name']);
     $description .= ' <small>' . t('(Machine name: @type)', array('@type' => $product_type['type'])) . '</small>';
 
     // Add the product variation type's row to the table's rows array.
-
     $rows[] = array(
       $description,
       theme('links', array('links' => $links, 'attributes' => array('class' => 'links inline operations'))),
@@ -40,10 +37,8 @@ function commerce_backoffice_product_variation_types_overview() {
   }
 
   // If no product variation types are defined...
-
   if (empty($rows)) {
     // Add a standard empty row with a link to add a new product variation type.
-
     $rows[] = array(
       array(
         'data' => t('There are no product variation types yet. <a href="@link">Add product variation type</a>.', array('@link' => url('admin/commerce/config/product-variation-types/add'))),
@@ -87,13 +82,11 @@ function commerce_backoffice_product_variation_type_form_wrapper($type) {
   }
 
   // Return a message if the product variation type is not governed by Product UI.
-
   if (!empty($type['type']) && $type['module'] != 'commerce_product_ui') {
     return t('This product variation type cannot be edited, because it is not defined by the Product UI module.');
   }
 
   // Include the forms file from the Product module.
-
   module_load_include('inc', 'commerce_product_ui', 'includes/commerce_product_ui.forms');
 
   return backdrop_get_form('commerce_product_ui_product_type_form', $type);
@@ -102,16 +95,14 @@ function commerce_backoffice_product_variation_type_form_wrapper($type) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
-function commerce_backoffice_product_form_commerce_product_ui_product_type_form_alter($form, $form_state) {
+function commerce_backoffice_product_form_commerce_product_ui_product_type_form_alter(&$form, &$form_state) {
   $product_type = $form_state['product_type'];
 
   // Remove fields not used by the Inline Entity Form.
-
   $form['product_type']['description']['#access'] = FALSE;
   $form['product_type']['help']['#access'] = FALSE;
 
   // Tweak the descriptions to mention product variation types.
-
   $form['product_type']['name']['#description'] = t('The human-readable name of this product variation type. It is recommended that this name begin with a capital letter and contain only letters, numbers, and spaces. This name must be unique.');
 
   if (empty($product_type['type'])) {
@@ -121,11 +112,8 @@ function commerce_backoffice_product_form_commerce_product_ui_product_type_form_
   $form['product_type']['revision']['#title'] = t('Default product variations of this type to be saved as new revisions when edited.');
 
   // Revisit this once Inline Entity Form gets entity_translation support.
-
   // If this variable is needed, it should probably reflect the
-
   // language_content_type_$type variable.
-
   if (module_exists('entity_translation')) {
     $form['product_type']['multilingual']['#type'] = 'value';
     $form['product_type']['multilingual']['#value'] = 0;
@@ -172,7 +160,7 @@ function commerce_backoffice_product_form_commerce_product_ui_product_type_form_
 /**
  * Form submit handler: save a product variation type.
  */
-function commerce_backoffice_product_variation_type_form_submit($form, $form_state) {
+function commerce_backoffice_product_variation_type_form_submit($form, &$form_state) {
   commerce_product_ui_product_type_form_submit($form, $form_state);
   if (!empty($form_state['product_type']['type'])) {
     $type_name = $form_state['product_type']['type'];
@@ -184,7 +172,6 @@ function commerce_backoffice_product_variation_type_form_submit($form, $form_sta
   $human_name = trim($form_state['values']['product_type']['name']);
   if (!empty($form_state['values']['create_product_display']) && !node_type_load($type_name)) {
     // Create the product display type.
-
     $type = node_type_set_defaults();
     $type->type = $type_name;
     $type->name = $human_name;
@@ -192,19 +179,20 @@ function commerce_backoffice_product_variation_type_form_submit($form, $form_sta
     $type->base = 'node_content';
     $status = node_type_save($type);
     // node_type_save doesn't invoke this.
-
     field_attach_create_bundle('node', $type_name);
     // Don't display author information
 
     // TODO This variable was probably removed in Backdrop without replacement.
-    variable_set('node_submitted_' . $type_name, 0);
-    // Remove promoted to front page.
+    //variable_set('node_submitted_' . $type_name, 0);
+    config_set('commerce_backoffice.settings','node_submitted_' . $type_name, 0);
 
+    // Remove promoted to front page.
     // TODO This variable was probably removed in Backdrop without replacement.
-    variable_set('node_options_' . $type_name, array('status'));
+    //variable_set('node_options_' . $type_name, array('status'));
+    config_set('commerce_backoffice.settings', 'node_options_' . $type_name, array('status'));
+
     $entity_info = entity_get_info('node');
     // Update the weight of the "title" field.
-
     if (!empty($entity_info['field replacement'])) {
       if ($instance = field_info_instance('node', 'title_field', $type_name)) {
         if (isset($instance['display'])) {
@@ -221,7 +209,6 @@ function commerce_backoffice_product_variation_type_form_submit($form, $form_sta
     }
 
     // Create the product reference field.
-
     $field = field_info_field('field_product');
     if (!$field) {
       $field = array(
@@ -312,7 +299,7 @@ function commerce_backoffice_product_variation_type_form_submit($form, $form_sta
  *
  * @see commerce_product_ui_product_type_form()
  */
-function commerce_backoffice_product_variation_type_form_delete_submit($form, $form_state) {
+function commerce_backoffice_product_variation_type_form_delete_submit($form, &$form_state) {
   $form_state['redirect'] = 'admin/commerce/config/product-variation-types/' . strtr($form_state['product_type']['type'], '_', '-') . '/delete';
 }
 
@@ -334,13 +321,11 @@ function commerce_backoffice_product_variation_type_delete_form_wrapper($type) {
   }
 
   // Return a message if the product variation type is not governed by Product UI.
-
   if ($product_type['module'] != 'commerce_product_ui') {
     return t('This product variation type cannot be deleted, because it is not defined by the Product UI module.');
   }
 
   // Don't allow deletion of product variation types that have products already.
-
   $query = new EntityFieldQuery();
 
   $query->entityCondition('entity_type', 'commerce_product', '=')
@@ -369,7 +354,7 @@ function commerce_backoffice_product_variation_type_delete_form_wrapper($type) {
  *
  * @see confirm_form()
  */
-function commerce_backoffice_product_variation_type_delete_form($form, $form_state, $product_type) {
+function commerce_backoffice_product_variation_type_delete_form($form, &$form_state, $product_type) {
   $form_state['product_type'] = $product_type;
 
   $form['#submit'][] = 'commerce_backoffice_product_variation_type_delete_form_submit';
@@ -389,7 +374,7 @@ function commerce_backoffice_product_variation_type_delete_form($form, $form_sta
 /**
  * Submit callback for commerce_product_product_type_delete_form().
  */
-function commerce_backoffice_product_variation_type_delete_form_submit($form, $form_state) {
+function commerce_backoffice_product_variation_type_delete_form_submit($form, &$form_state) {
   $product_type = $form_state['product_type'];
 
   commerce_product_ui_product_type_delete($product_type['type']);

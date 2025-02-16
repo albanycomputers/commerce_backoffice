@@ -15,8 +15,6 @@ function commerce_backoffice_order_views_api() {
  */
 function commerce_backoffice_order_menu() {
   // Megarow callback.
-
-
   $items['commerce_backoffice/order/%commerce_order/%'] = array(
     'title callback' => 'commerce_order_ui_order_title',
     'title arguments' => array(2),
@@ -35,8 +33,6 @@ function commerce_backoffice_order_menu() {
  */
 function commerce_backoffice_order_admin_paths() {
   // The order view should use the admin theme.
-
-
   $paths = array(
     'commerce_backoffice/order/*' => TRUE,
   );
@@ -63,10 +59,8 @@ function commerce_backoffice_order_view($order, $display_id) {
 /**
  * Implements hook_form_views_form_alter().
  */
-function commerce_backoffice_order_form_alter($form, $form_state, $form_id) {
+function commerce_backoffice_order_form_alter(&$form, &$form_state, $form_id) {
   // Alter the Exposed Filters for orders page
-
-
   if (isset($form['submit']['#id']) && $form['submit']['#id'] == 'edit-submit-commerce-backoffice-orders') {
     $form['status']['#attributes'] = array('data-placeholder' => array(t('All statuses')));
     $form['combine']['#attributes'] = array('placeholder' => array(t('Search by username, email, order ID')));
@@ -78,7 +72,7 @@ function commerce_backoffice_order_form_alter($form, $form_state, $form_id) {
  *
  * Adds a new order view mode, used to display the order in a megarow.
  */
-function commerce_backoffice_order_entity_info_alter($entity_info) {
+function commerce_backoffice_order_entity_info_alter(&$entity_info) {
   $entity_info['commerce_order']['view modes']['backoffice'] = array(
     'label' => t('Backoffice'),
     'custom settings' => FALSE,
@@ -88,7 +82,7 @@ function commerce_backoffice_order_entity_info_alter($entity_info) {
 /**
  * Implements hook_theme().
  */
-function commerce_backoffice_order_theme($existing) {
+function commerce_backoffice_order_theme(&$existing) {
   $themes =  array(
     'commerce_order__backoffice' => array(
       'path' => backdrop_get_path('module', 'commerce_backoffice_order') . '/theme',
@@ -102,7 +96,7 @@ function commerce_backoffice_order_theme($existing) {
 /**
  * Add the template file for the backoffice view mode.
  */
-function commerce_backoffice_order_preprocess_entity($vars) {
+function commerce_backoffice_order_preprocess_entity(&$vars) {
   if ($vars['entity_type'] == 'commerce_order' && in_array($vars['view_mode'], array('administrator', 'backoffice'))) {
     $vars['theme_hook_suggestions'][] = 'commerce_order__backoffice';
     $vars['classes_array'][] = 'commerce-order-backoffice';
@@ -138,8 +132,6 @@ function commerce_backoffice_order_entity_view($entity, $entity_type, $view_mode
   if ($entity_type == 'commerce_order' && in_array($view_mode, array('administrator', 'backoffice'))) {
     $status_form = backdrop_get_form('commerce_backoffice_order_status_form', $entity);
     // Bubble-up the signal for refreshing the parent row.
-
-
     if (!empty($status_form['#megarow_refresh_parent'])) {
       $entity->content['#megarow_refresh_parent'] = TRUE;
     }
@@ -160,21 +152,17 @@ function commerce_backoffice_order_entity_view($entity, $entity_type, $view_mode
 /**
  * Form callback: Returns the form for modifying the status column.
  */
-function commerce_backoffice_order_status_form($form, $form_state, $order) {
+function commerce_backoffice_order_status_form($form, &$form_state, $order) {
   $form_state['order'] = $order;
 
   if (!empty($form_state['order_saved'])) {
     // Show the status message on top of the form.
-
-
     backdrop_set_message(t('The order status has been updated.'));
     $form['status_message'] = array(
       '#type' => 'markup',
       '#markup' => theme('status_messages'),
     );
     // Send the signal to reload the parent row.
-
-
     $form['#megarow_refresh_parent'] = TRUE;
   }
 
@@ -196,7 +184,7 @@ function commerce_backoffice_order_status_form($form, $form_state, $order) {
 /**
  * Submit callback for commerce_backoffice_order_status_form.
  */
-function commerce_backoffice_order_status_form_submit($form, $form_state) {
+function commerce_backoffice_order_status_form_submit($form, &$form_state) {
   $order = $form_state['order'];
   $order->status = $form_state['values']['status'];
   commerce_order_save($order);
