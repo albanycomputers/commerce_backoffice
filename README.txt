@@ -1,10 +1,11 @@
-## Commerce Backoffice
-
+Commerce Backoffice
+===================
 Provides the backoffice functionality present in Commerce Kickstart v2.
 
 Contains three submodules: commerce_backoffice_product, commerce_backoffice_order, commerce_backoffice_content.
 
-### Commerce Backoffice Product
+Commerce Backoffice Product
+===========================
 
 Provides a better experience for stores using nodes as product displays for grouping product variations (commerce_product entities).
 
@@ -18,7 +19,8 @@ Provides a better experience for stores using nodes as product displays for grou
 
 Dependencies: Inline Entity Form, Views Megarow, Views Bulk Operations
 
-### Commerce Backoffice Order
+Commerce Backoffice Order
+-------------------------
 
 Provides a better order management experience.
 
@@ -28,29 +30,34 @@ Provides a better order management experience.
 
 Dependencies: EVA, Views Megarow, Views Bulk Operations
 
-### Commerce Backoffice Content
+Commerce Backoffice Content
+---------------------------
 
 Provides views for managing content (excluding all product display types, and their categories) and comments.
 
 
-## Installation
+Installation
+============
 
 
 - Install this module using the official Backdrop CMS instructions at
   https://docs.backdropcms.org/documentation/extend-with-modules.
 
-## Issues
-
+Issues
+======
 
 Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/commerce_backoffice/issues).
 
-## Current Maintainer(s):
+Current Maintainer(s):
+======================
 - [Steve Moorhouse (albanycomputers)] (https://github.com/albanycomputers)
 - Seeking additional maintainers.
 
-## Credits:
+Credits:
+--------
 
-### Original Authors
+Original Authors
+----------------
 This module is a fork of https://www.drupal.org/project/commerce_backoffice Version 7.x-1.6
 
 Bálint Kléri (balintbrews)      https://www.drupal.org/u/balintbrews
@@ -60,11 +67,14 @@ Jonathan Sacksick (jsacksick)   https://www.drupal.org/u/jsacksick
 Ryan Szrama (rszrama)           https://www.drupal.org/u/rszrama
 
 
-### Backdrop CMS
-## Sponsorship:
+Backdrop CMS
+============
+Sponsorship:
+------------
  - [Albany Computer Services] (https://www.albany-computers.co.uk)
  - [Albany Web Design] (https://www.albanywebdesign.co.uk)
  - [Albany Hosting] (https://www.albany-hosting.co.uk)
 
-## License
+License
+-------
 This project is GPL v2 software. See the LICENSE.txt file in this directory for complete text.
