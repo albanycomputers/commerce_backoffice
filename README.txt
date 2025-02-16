@@ -1,12 +1,11 @@
-Commerce Backoffice
-===================
+##Commerce Backoffice
 
 Provides the backoffice functionality present in Commerce Kickstart v2.
 
 Contains three submodules: commerce_backoffice_product, commerce_backoffice_order, commerce_backoffice_content.
 
-Commerce Backoffice Product
----------------------------
+###Commerce Backoffice Product
+
 Provides a better experience for stores using nodes as product displays for grouping product variations (commerce_product entities).
 
     The node/add screen is now split into two tabs, "Create content" (ordinary node types), and "Create product" (product display node types).
@@ -19,8 +18,8 @@ Provides a better experience for stores using nodes as product displays for grou
 
 Dependencies: Inline Entity Form, Views Megarow, Views Bulk Operations
 
-Commerce Backoffice Order
--------------------------
+###Commerce Backoffice Order
+
 Provides a better order management experience.
 
     The order view has been redesigned for better usability, and contains exposed filters for the order status and creation date.
@@ -29,19 +28,19 @@ Provides a better order management experience.
 
 Dependencies: EVA, Views Megarow, Views Bulk Operations
 
-Commerce Backoffice Content
----------------------------
+###Commerce Backoffice Content
+
 Provides views for managing content (excluding all product display types, and their categories) and comments.
 
 
-Installation
-------------
+##Installation
+
 
 - Install this module using the official Backdrop CMS instructions at
   https://docs.backdropcms.org/documentation/extend-with-modules.
 
-Issues
-------
+##Issues
+
 
 Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/commerce_backoffice/issues).
 
