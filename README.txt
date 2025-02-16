@@ -1,3 +1,6 @@
+Commerce Backoffice
+===================
+
 Provides the backoffice functionality present in Commerce Kickstart v2.
 
 Contains three submodules: commerce_backoffice_product, commerce_backoffice_order, commerce_backoffice_content.
@@ -24,8 +27,45 @@ Provides a better order management experience.
     Provides rules-powered bulk operations for modifying the order statuses.
     Uses the megarow pattern to provide a "Quick Edit" link in the view, that shows the line items, customer information, payments, recent messages (if Commerce Message is enabled). Allows the admin to add a new message or change the order status.
 
-Dependencies: Date, EVA, Views Megarow, Views Bulk Operations
+Dependencies: EVA, Views Megarow, Views Bulk Operations
 
 Commerce Backoffice Content
 ---------------------------
 Provides views for managing content (excluding all product display types, and their categories) and comments.
+
+
+Installation
+------------
+
+- Install this module using the official Backdrop CMS instructions at
+  https://docs.backdropcms.org/documentation/extend-with-modules.
+
+Issues
+------
+
+Bugs and feature requests should be reported in [the Issue Queue](https://github.com/backdrop-contrib/commerce_backoffice/issues).
+
+## Current Maintainer(s):
+- [Steve Moorhouse (albanycomputers)] (https://github.com/albanycomputers)
+- Seeking additional maintainers.
+
+## Credits:
+
+### Original Authors
+This module is a fork of https://www.drupal.org/project/commerce_backoffice Version 7.x-1.6
+
+Bálint Kléri (balintbrews)      https://www.drupal.org/u/balintbrews
+Bojan Živanović (bojanz)        https://www.drupal.org/u/bojanz
+centarro                        https://www.drupal.org/u/centarro
+Jonathan Sacksick (jsacksick)   https://www.drupal.org/u/jsacksick
+Ryan Szrama (rszrama)           https://www.drupal.org/u/rszrama
+
+
+### Backdrop CMS
+## Sponsorship:
+ - [Albany Computer Services] (https://www.albany-computers.co.uk)
+ - [Albany Web Design] (https://www.albanywebdesign.co.uk)
+ - [Albany Hosting] (https://www.albany-hosting.co.uk)
+
+## License
+This project is GPL v2 software. See the LICENSE.txt file in this directory for complete text.
