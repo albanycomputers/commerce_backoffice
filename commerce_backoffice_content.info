@@ -1,0 +1,11 @@
+name = Commerce Backoffice content
+description = Backoffice content views for Commerce.
+backdrop = 1.x
+type = module
+package = Commerce (contrib)
+
+dependencies[] = commerce_backoffice
+dependencies[] = commerce_product_reference
+dependencies[] = views_bulk_operations
+
+; Views handlers

@@ -1,0 +1,6 @@
+name = Commerce Backoffice
+description = Provides the basic backoffice functionality needed by the submodules.
+backdrop = 1.x
+type = module
+package = Commerce (contrib)
+

@@ -1,0 +1,14 @@
+name = Commerce Backoffice Product
+description = Provides advanced product management.
+backdrop = 1.x
+type = module
+package = Commerce (contrib)
+
+dependencies[] = commerce_backoffice
+dependencies[] = commerce_product
+dependencies[] = commerce_product_ui
+dependencies[] = views
+dependencies[] = views_bulk_operations
+dependencies[] = views_megarow
+dependencies[] = commerce_product_reference
+

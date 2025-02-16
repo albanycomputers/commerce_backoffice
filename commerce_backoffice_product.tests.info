@@ -1,0 +1,12 @@
+[CommerceBackofficeProductWebTestCase]
+name = CommerceBackofficeProductWebTestCase
+description = CommerceBackofficeProductWebTestCase
+group = commerce_backoffice_product
+file = commerce_backoffice_product.test
+
+[CommerceBackofficeProductTestCase]
+name = Commerce backoffice product interface
+description = Test the commerce backoffice product interface.
+group = Commerce backoffice product
+file = commerce_backoffice_product.test
+
