@@ -13,16 +13,16 @@ This a port of the Drupal version 7.x-1.6
 ## Requirements:
 Commerce Backoffice Product
 ---------------------------
-    - Inline Entity Form
-    - Views Megarow
-    - Views Bulk Operations
+- Inline Entity Form
+- Views Megarow
+- Views Bulk Operations
 
 Commerce Backoffice Order
 -------------------------
-    - Date
-    - EVA
-    - Views Megarow
-    - Views Bulk Operations
+- Date
+- EVA
+- Views Megarow
+- Views Bulk Operations
 
 Commerce Backoffice Order
 -------------------------
