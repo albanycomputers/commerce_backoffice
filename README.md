@@ -11,21 +11,19 @@ This a port of the Drupal version 7.x-1.6
 
 
 ## Requirements:
-Commerce Backoffice Product
----------------------------
+### Commerce Backoffice Product
 - Inline Entity Form
 - Views Megarow
 - Views Bulk Operations
 
-Commerce Backoffice Order
--------------------------
+### Commerce Backoffice Order
 - Date
 - EVA
 - Views Megarow
 - Views Bulk Operations
 
-Commerce Backoffice Order
--------------------------
+### Commerce Backoffice Order
+
 
 ## Installation:
 Install this module using the official Backdrop CMS instructions at https://docs.backdropcms.org/documentation/extend-with-modules
@@ -40,7 +38,7 @@ Uses the megarow pattern to provide a "Quick Edit" link in the view, that shows 
 Modifies the "Content types" screen by adding additional help text for understanding product displays, and adds a column to the table that indicates whether the node type is a product display node type*.
 Disables the Commerce-provided "Product types" UI, and provides a custom "Product variation types" UI that contains additional help text, hides fields that are not used by the Inline Entity Form (help, description for each type), and provides the ability to create a matching node type for each created product variation type.
 
-* - Every node type with a product reference field is considered a product display node type.
+* Every node type with a product reference field is considered a product display node type.
 
 ### Commerce Backoffice Order
 Provides a better order management experience.
